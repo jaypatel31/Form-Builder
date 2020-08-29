@@ -1,3 +1,10 @@
+<?php 
+	session_start();
+	require 'vendor/autoload.php';
+	use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+	
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,18 +34,20 @@
 	//print_r($_POST);
 	//print_r($_POST['radio-gp'][3]);
 	//echo "</pre>";
-	$last_key = array_key_last($_POST['elem']);;
-	$first_value = array_key_first($_POST['elem']); // First element's value
+	//$last_key = array_key_last($_POST['elem']);;
+	//$first_value = array_key_first($_POST['elem']); // First element's value
 	$st = strtotime($_POST['st-date']." ".$_POST['st-time']);
 	$ed = strtotime($_POST['ed-date']." ".$_POST['ed-time']);
 	//echo $first_key;
 	//print_r($first_value);
 	//echo count($_POST['elem']);
 	$current = time();
+	$supreme = array();
+	$supreme2 = array();
 	if($current>=$st && $current<=$ed){
  ?>
 	
-	<form enctype="multipart/form-data">
+	<form action="answer.php" method="post" enctype="multipart/form-data">
 	<div class="bg-contact2" style="background-image: url('images/bg-01.jpg');">
 		<div class="container-contact2">
 			<div class="wrap-contact2">
@@ -50,7 +59,9 @@
 						<?php echo htmlentities($_POST['description']); ?>
 					</div>
 					<?php 
+					if(isset($_POST['elem'])){
 						foreach ($_POST['elem'] as $i => $value){
+							array_push($supreme,htmlentities($_POST['name-'.$i.'']));
 					?>
 					
 					<?php 
@@ -60,21 +71,38 @@
 					} ?>
 					<?php if(!strpos($_POST['elem'][$i],'file')>0) {					
 						echo '<div class="wrap-input2">';
-					}
+						 echo $_POST['elem'][$i].$req; ?>
+						 
+						  <span class="focus-input2" data-placeholder="<?php echo htmlentities($_POST['name-'.$i.'']) ?>"></span>
+						
+					<?php 
+					
+					 echo "</div>";
+					} 
 					else{
-						echo "<div>";
+						echo "<div >";
+						echo htmlentities($_POST['name-'.$i.'']);
+						 echo $_POST['elem'][$i].$req;
+						 echo "</div>";
 					}?>
-						<?php echo $_POST['elem'][$i].$req?>
-						<span class="focus-input2" data-placeholder="<?php echo htmlentities($_POST['name-'.$i.'']) ?>"></span>
-					</div>
-						<?php } ?>
+						
+						
+					<?php } } 
+					 ?>
 						
 						
 					<?php 
+					if(isset($_POST['radio-gp'])){
 						for($i=array_key_first($_POST['radio-gp']);$i<=array_key_last($_POST['radio-gp']);$i++){
 							
 							$last_key_r = array_key_last($_POST['radio-gp'][$i]);;
 							$first_value_r = array_key_first($_POST['radio-gp'][$i]);
+							preg_match_all('/name=\W\w+\W\w+\W\d+/',$_POST['radio-gp'][$i][$first_value_r],$match);
+							$slice = $match[0][0];
+							$slice = substr($slice,(strpos($slice,"'")+1));
+							//echo $slice;
+							array_push($supreme2,$slice);
+							array_push($supreme,htmlentities($_POST['name-'.$i.'']));
 					?>
 					
 					<?php 
@@ -83,18 +111,24 @@
 						$req = "required >";
 					} ?>	
 					<div class="mb-4">
-						<label><?php echo htmlentities($_POST['name-'.$i.''])?> :</label>
+						<label><?php echo htmlentities($_POST['name-'.$i.''])?> </label>
 						<?php for($k=$first_value_r;$k<=$last_key_r;$k++){
 							
+							$value ="value = '".htmlentities($_POST['radio-gp-'.$i.'-name'][$k])."'";
+
 						?>
 						<?php 
+							echo "<br/>";
+							echo $_POST['radio-gp'][$i][$k].$value.$req;
 							
-							echo $_POST['radio-gp'][$i][$k].$req;
 							echo htmlentities($_POST['radio-gp-'.$i.'-name'][$k]);
 						} ?>
 					</div>
 						<?php 
-						} ?>
+						} 
+					} 
+					$_SESSION['total-ip'] = $supreme;
+					$_SESSION['extra'] = $supreme2;					?>
 				<button class="btn btn-primary" type="submit">SUBMIT</button>
 				</form>
 			</div>
@@ -135,3 +169,29 @@
 
 </body>
 </html>
+<?php
+		//$myfile = fopen('hello.php', "w");
+		//$txt = file_get_contents('http://localhost/PHPEX/Form%20Builder/response.php');
+		//fwrite($myfile, $txt);
+		//fclose($myfile);
+		$file = time().htmlentities($_POST['heading']).'.xlsx';
+	if(!file_exists('$file')){
+		//echo "<pre>";
+		//print_r($_POST);
+		//print_r($_SESSION);
+		//print_r($group);
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('A1', 'Hello World !');
+		for($i=0;$i<count($_SESSION['total-ip']);$i++){
+			$char = chr(65+$i);
+			$sheet->setCellValue($char.'1', $_SESSION['total-ip'][$i]);
+		}
+		$writer = new Xlsx($spreadsheet);
+		$writer->save($file);
+		$_SESSION['filename'] = $_SERVER['SCRIPT_NAME'].$file;
+		$_SESSION['formname'] = $_SERVER['SCRIPT_NAME'];
+		
+		//header('Location: index.php?success=File Creeated Suucesfully');
+	}
+?>

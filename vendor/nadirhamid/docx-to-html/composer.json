@@ -1,0 +1,20 @@
+{
+    "name": "nadirhamid/docx-to-html",
+    "type": "library",
+    "description": "composer integration of xylude/Docx-to-HTML",
+    "keywords": ["docx", "html"],
+    "version": "v0.0.1",
+    "homepage": "https://github.com/nadirhamid/Docx-to-HTML",
+    "reference": "v0.9.2",
+    "license": "MIT",
+    "require": {
+	"php": ">=5.3.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+	"classmap": [
+		"source/"
+	]
+    }
+}

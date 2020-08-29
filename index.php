@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	//echo "<pre>";
+	//print_r($_SERVER);
+	//echo "</pre>";
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -155,7 +161,15 @@
 	  </div>  
 	</nav>
 	<div class="container">
-	<form method="post" action="response.php">
+	<?php 
+		if(isset($_GET['success'])){
+			echo "<div class='text-primary' style='font-size:20px;' class='font-weight-bold'>".$_GET['success']."<br/>";
+			echo "Link of Execle File : ".$_SESSION['formname']."<br/>";
+			echo "Link of Execle File : ".$_SESSION['filename']."<br/>";
+			echo "Please Save these Name For Future refrences!!</div>";
+		}
+	?>
+	<form method="post" action="Filemake.php">
 	<div class=" card   bg-light shadow mt-2 mb-3 bg-white rounded">
 		<div class="card-header bg-primary">
 			<div class="font-weight-bold lead text-white "><h4>Form-Information</h4></div>
@@ -194,7 +208,7 @@
 					<i class="fa fa-times closebtn" onclick = "close2(1)"></i>
 				</div>	
 					<div class="card-body" >
-						<input type="text" name="elem[1]" value="<input class='input2' type='text' name='txt-1'" hidden >
+						<input type="text" name="elem[1]" value="<input class='input2' type='text' name='input[1]'" hidden >
 						<label for="field-text-1" class="font-weight-bold">Field Name: </label><br/>
 						<input id="input1" class="values2" type="text" name="name-1" required>
 						<label class="mt-4 checkbox"><input type="checkbox" name="check-1" value="checked-1" checked><span class="ml-2 lead">Required</span></label>
@@ -206,7 +220,7 @@
 					<i class="fa fa-times closebtn" onclick = "close2(2)"></i>
 				</div>	
 					<div class="card-body" >
-						<input type="text" name="elem[2]" value="<input class='input2' type='email' name='txt-1'" hidden >
+						<input type="text" name="elem[2]" value="<input class='input2' type='email' name='input[2]'" hidden >
 						<label for="field-text-1" class="font-weight-bold">Field Name: </label><br/>
 						<input id="input1" class="values2" type="text" name="name-2" required>
 						<label class="mt-4 checkbox"><input type="checkbox" name="check-2" value="checked-1" checked><span class="ml-2 lead">Required</span></label>
@@ -265,7 +279,7 @@
 		 j= num;
 		 var hidden = `<input type="text" name="radio-gp[${num2}][${j}]" value="<input class='mr-2'  type='radio' name='${id}'" hidden >`;
 		 if(box == "checkbox"){
-			 hidden = `<input type="text" name="radio-gp[${num2}][${j}]" value="<input class='mr-2'  type='checkbox' name='${id}'" hidden >`;
+			 hidden = `<input type="text" name="radio-gp[${num2}][${j}]" value="<input class='mr-2'  type='checkbox' name='${id}[${j}]'" hidden >`;
 		 }
 			addr.innerHTML +=`<div id="elem-radio-${j}" class="relative">
 							<i class="fa fa-times closebtn" onclick = "close23(event)"></i>
@@ -290,11 +304,12 @@
 		var add = document.getElementById('form-structure');
 		//console.log(add.innerHTML);
 		var addition = `<input type="text" name="elem[${i}]" value="<input class='input2' type='${type}' name='${type}-${i}'" hidden >`;
-		var addition = `<input type="text" name="elem[${i}]" value="<input class='input2' type='${type}' name='${type}-${i}'" hidden >`;
+		var required = `<label class="mt-4 checkbox"><input type="checkbox" name="check-${i}" value="checked" checked><span class="ml-2 lead">Required</span></label>`;
 		if(type=="radio" || type=="checkbox" ){
 			var hidden = `<input type="text" name="radio-gp[${i}][1]" value="<input class='mr-2' type='radio' name='radio-gp-${i}'" hidden >`;
 		 if(type == "checkbox"){
-			 hidden = `<input type="text" name="radio-gp[${i}][1]" value="<input class='mr-2' type='checkbox' name='radio-gp-${i}'" hidden >`;
+			 hidden = `<input type="text" name="radio-gp[${i}][1]" value="<input class='mr-2' type='checkbox' name='radio-gp-${i}[1]'" hidden >`;
+			 required = "";
 		 }
 			addition = `<button type="button" class="btn btn-primary btn-sm mt-3" onclick="add_radio(event,'${type}')">Add Radio</button><br/>
 						<div id="radio-gp-${i}" class="mt-3 ml-3" style="width:80%">
@@ -316,7 +331,7 @@
 						<label for="field-text-${i}" class="font-weight-bold">Field Name: </label><br/>
 						<input id="input1" class="values2" type="text" name="name-${i}" required>
 						${addition}
-						<label class="mt-4 checkbox"><input type="checkbox" name="check-${i}" value="checked" checked><span class="ml-2 lead">Required</span></label>
+						${required}
 					</div>
 				</div>`;
 				i++;
