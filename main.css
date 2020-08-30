@@ -21,7 +21,7 @@ body{
 }
 .closebtn{
 	position:absolute;
-	top:8%;
+	top:20%;
 	font-size:18px;
 	right:5%;
 	cursor:pointer;
@@ -146,6 +146,9 @@ div>label{
 .dropright:hover .dropright-menu{
 	display: block;
 	box-shadow: 0 20px 48px -8px green;
+}
+.card-header:first-child {
+	position:relative;
 }
 .dropdown-menu:hover{
 	

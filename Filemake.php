@@ -3,7 +3,7 @@
 	require 'vendor/autoload.php';
 	use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-	$file = time().htmlentities($_POST['heading']);
+	$file = "Forms/".time().htmlentities($_POST['heading']);
 	$php = $file.".php";
 	
 ?>
@@ -51,11 +51,11 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 						$req = "required >";
 					} 
 					$label ='<div class="mb-4">
-						<label>'.htmlentities($_POST["name-".$i.""]).'</label>';
+						<label>'.htmlentities($_POST["name-".$i.""]).'</label><br/>';
 						for($k=$first_value_r;$k<=$last_key_r;$k++){
 							$value ="value = '".htmlentities($_POST['radio-gp-'.$i.'-name'][$k])."'";
 							
-						$label.= $_POST['radio-gp'][$i][$k].$value.$req.htmlentities($_POST['radio-gp-'.$i.'-name'][$k]);
+						$label.= $_POST['radio-gp'][$i][$k].$value.$req.htmlentities($_POST['radio-gp-'.$i.'-name'][$k])."<br/>";
 						} 
 					$label.='</div>';
 					array_push($content,$label);	
@@ -97,6 +97,10 @@ $myfile = fopen($php, "w");
 $txt = '
 <?php 
 	session_start();
+	$msg=false;
+	if(isset($_GET["Status"])){
+		$msg = $_GET["Status"];
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -105,20 +109,20 @@ $txt = '
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="../images/icons/favicon.ico"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="../css/util.css">
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
 <!--===============================================================================================-->
 </head>
 <body>
@@ -135,10 +139,17 @@ $txt = '
 	if($current>=$st && $current<=$ed){
  ?>
 	
-	<form action="answer.php" method="post" enctype="multipart/form-data">
-	<div class="bg-contact2" style="background-image: url("images/bg-01.jpg");">
+	<form action="../answer.php" method="post" enctype="multipart/form-data">
+	<div class="bg-contact2" style="background-image: url(\'../images/bg-01.jpg\');">
 		<div class="container-contact2">
 			<div class="wrap-contact2">
+			<?php 
+				if($msg!==false){
+					echo "<div class=\'alert alert-success text-center alert-dismissible fade show\'>";
+					echo \'<button type="button" class="close" data-dismiss="alert">&times;</button>\';
+					echo $msg."</div>";
+				}
+			?>
 				<form class="contact2-form validate-form">
 					<span class="contact2-form-title">
 						 '.htmlentities($_POST['heading']).'
@@ -161,7 +172,7 @@ $txt = '
 
 	<?php } 
 	else{  ?>
-		 <div class="bg-contact2" style="background-image: url(\'images/bg-01.jpg\');">
+		 <div class="bg-contact2" style="background-image: url(\'../images/bg-01.jpg\');">
 				<div class="container-contact2">
 				<div class="wrap-contact2 fs-20 text-center">
 					User Not Taking response Now :)
@@ -171,14 +182,14 @@ $txt = '
 	
 	<?php } ?>
 <!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../vendor/bootstrap/js/popper.js"></script>
+	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
+	<script src="../vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->
-	<script src="js/main.js"></script>
+	<script src="../js/main.js"></script>
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>

@@ -9,7 +9,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Medical-Info</title>
+	<title>Form-Builder</title>
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
  	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -20,153 +20,28 @@
 	<link rel="stylesheet" href="main.css">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg bg-light  navbar-dark">
-	  <a class="navbar-brand text-primary float-left" id="logo" href="#">Medical-Info</a>
+	<nav class="navbar navbar-expand-lg bg-light  navbar-dark text-center">
+	  <a class="navbar-brand d-block w-100 text-primary text-center " id="logo" href="#">FORM-BUILDER</a>
 	  
-	  	<button id="ham" onclick="change()"  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-	    	<!--<span  class="navbar-toggler-icon"></span>-->
-		    <span  class="icon"  class=""></span>
-		    <span  class="icon"  class=""></span>
-		    <span  class="icon"  class=""></span>
-	  	</button>
-	  
-	  <div class="collapse navbar-collapse float-right" id="collapsibleNavbar">
-	    <ul class="navbar-nav">
-	      <li class="nav-item dropdown">
-	      	<div id="navbardrop">
-      <a class="nav-link dropdown-toggle text-dark" href="#"  data-	toggle="dropdown">
-        About Us
-      </a>
-      <div class="dropdown-menu" id="card">
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Our Vision And Purpose</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Our Value</a>
-        <a class="dropdown-item text-wrap " href="#"><i class="fa fa-caret-right caret align2" aria-hidden="true"></i><span class="alignment">The Macquarie University Hospital Experience</span></a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>MQ Health</a>
-        <div class="dropright">
-         	<a class="dropdown-item text-wrap " href="#"><i class="fa fa-caret-right caret align2" aria-hidden="true"></i><span class="alignment">TFaculty of Medicine and Health Sciences</span><i class="fa fa-caret-right caret2 float-right align2" aria-hidden="true"></i></a>
-          	<div class="dropright-menu" id="card">
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Fmhs Courses</a>
-   			</div>
-   		</div>
-          <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Board and Executive Team</a>
-        
-      </div>
-    	</div>
-    </li>    
-    <li class="nav-item dropdown">
-	      	<div id="navbardrop">
-      <a class="nav-link dropdown-toggle text-dark" href="#"  data-	toggle="dropdown">
-        Doctors
-      </a>
-      <div class="dropdown-menu " id="card">
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Our Doctors</a>
-        <a class="dropdown-item text-wrap" href="#"><i class="fa fa-caret-right caret align2" aria-hidden="true"></i><span class="alignment">Referring to Macquarie University Hospital</span></a>
-        <a class="dropdown-item text-wrap" href="#"><i class="fa fa-caret-right caret align2" aria-hidden="true"></i><span class="alignment">Accreditation at Macquarie University Hospital</span></a>    
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Gp Education</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Gp Events-</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Gp Events Archieve</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>General Practitioners Update</a>  
-      </div>
-    	</div>
-    </li> 
-    <li class="nav-item dropdown">
-	      	<div id="navbardrop">
-      <a class="nav-link dropdown-toggle text-dark" href="#"  data-	toggle="dropdown">
-        Clinical Programs
-      </a>
-      <div class="dropdown-menu " id="card">
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Bone And Joint</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Cancer</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Cardiovascular and Respiratory</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Critical Care And Anaesthetics</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Neurosciences</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Primary Care And Well Being</a>
-       <a class="dropdown-item text-wrap" href="#"><i class="fa fa-caret-right caret align2" aria-hidden="true"></i><span class="alignment">Surgery and Gastrointestinal Surgery</span></a> 
-
-      </div>
-    	</div>
-    </li>
-    <li class="nav-item dropdown">
-	      	<div id="navbardrop">
-      <a class="nav-link dropdown-toggle text-dark" href="#"  data-	toggle="dropdown">
-        Services And Specialties
-      </a>
-      <div class="dropdown-menu " id="card">
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Our Specialties</a>
-         <div class="dropright">
-         	<a class="dropdown-item text-wrap " href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Cancer Program<i class="fa fa-caret-right caret2 float-right align2" aria-hidden="true"></i></a>
-          	<div class="dropright-menu" id="card">
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Home</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>About Us</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Our Doctors</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Clinician Resources</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Patient Support</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Patient Information</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Colorectal Cancer</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Cancer Information</a>
-   			</div>
-   		</div>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Allied Health Services</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Imaging Servicess</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Radiotherapy Services</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Pathology Health Services</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Facilities and Amenities</a>
-        <div class="dropright">
-         	<a class="dropdown-item text-wrap " href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Technology<i class="fa fa-caret-right caret2 float-right align2" aria-hidden="true"></i></a>
-          	<div class="dropright-menu" id="card">
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>TAVI</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Gamma Knife</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Da Vinci Surgical System</a>
-   			</div>
-   		</div>
-        <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Integrated Clinics</a>
-      </div>
-    	</div>
-    </li>
-    <li class="nav-item dropdown">
-	      	<div id="navbardrop">
-      <a class="nav-link dropdown-toggle text-dark" href="#"  data-	toggle="dropdown">
-        Patient And Visiter Info
-      </a>
-      <div class="dropdown-menu " id="card">
-      	<a class="dropdown-item text-wrap" href="#"><i class="fa fa-caret-right caret align2" aria-hidden="true"></i><span class="alignment">Patient Information and Education</span></a> 
-        <div class="dropright">
-         	<a class="dropdown-item text-wrap " href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Visitor Info<i class="fa fa-caret-right caret2 float-right align2" aria-hidden="true"></i></a>
-          	<div class="dropright-menu" id="card">
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Visiting Hours</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Getting To The Hospital</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Facilities For Visitor</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Contacting a Patient</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Hospital Map</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Nearby Accommodation</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Online Gift Shop</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Send an E-Card</a>
-   			</div>
-   		</div>
-       <div class="dropright">
-         	<a class="dropdown-item text-wrap " href="#"><i class="fa fa-caret-right caret" aria-hidden="true"></i>Discharge<i class="fa fa-caret-right caret2 float-right align2" aria-hidden="true"></i></a>
-          	<div class="dropright-menu" id="card">
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Discharge Planning</a>
-		      <a class="dropdown-item" href="#"><i class="fa fa-caret-right caret text-success" aria-hidden="true"></i>Gamma Knife</a>
-		      <a class="dropdown-item text-wrap" href="#"><i class="fa fa-caret-right caret text-success align2" aria-hidden="true"></i><span class="alignment">Planning ahead for your return home</span></a> 
-   			</div>
-   		</div>
-      </div>
-    	</div>
-    </li> 
-     <li class="nav-item">
-        <a class="nav-link text-dark" href="#">Contact Us</a>
-      </li>  
-	    </ul>
-	  </div>  
+	  	
 	</nav>
 	<div class="container">
 	<?php 
+		
+		$path = substr($_SERVER['SCRIPT_FILENAME'],0,strpos($_SERVER['SCRIPT_FILENAME'],"index"));
+		//$path= $path."Forms/";
 		if(isset($_GET['success'])){
+			echo '<div class=" card   bg-light shadow mt-2 mb-3 bg-white rounded">';
+			echo '<div class="card-header bg-success">';
+				echo '<div class="font-weight-bold lead text-white "><h4>Request Accepted</h4></div>';
+			echo '</div>';
+			echo '<div class="card-body" >';
 			echo "<div class='text-primary' style='font-size:20px;' class='font-weight-bold'>".$_GET['success']."<br/>";
-			echo "Link of Execle File : ".$_SESSION['formname']."<br/>";
-			echo "Link of Execle File : ".$_SESSION['filename']."<br/>";
-			echo "Please Save these Name For Future refrences!!</div>";
+			echo "Link of Execle File :<br/> <a class='font-weight-bold' href='".$path.$_SESSION['formname']."'>".$path.$_SESSION['formname']."</a><br/>";
+			echo "Link of Execle File :<br/> <a class='font-weight-bold' href='".$path.$_SESSION['formname']."'>".$path.$_SESSION['filename']."</a><br/>";
+			echo "<span class='font-weight-bolder'>Please Save these Name For Future refrences!!</span></div>";
+			echo '</div>';
+			echo '</div>';
 		}
 	?>
 	<form method="post" action="Filemake.php">
@@ -281,10 +156,11 @@
 		 if(box == "checkbox"){
 			 hidden = `<input type="text" name="radio-gp[${num2}][${j}]" value="<input class='mr-2'  type='checkbox' name='${id}[${j}]'" hidden >`;
 		 }
+		 var head = box.charAt(0).toUpperCase()+box.slice(1);
 			addr.innerHTML +=`<div id="elem-radio-${j}" class="relative">
 							<i class="fa fa-times closebtn" onclick = "close23(event)"></i>
 							${hidden}
-							<label for="field-text-${j}" class="font-weight-light">Radio Name: 					</label><br/>
+							<label for="field-text-${j}" class="font-weight-light">${head} Name: 					</label><br/>
 							<input id="input1" class="values2 values3" type="text" name="${id}-name[${j}]" required>
 							</div>`;
 							j++;
@@ -311,12 +187,13 @@
 			 hidden = `<input type="text" name="radio-gp[${i}][1]" value="<input class='mr-2' type='checkbox' name='radio-gp-${i}[1]'" hidden >`;
 			 required = "";
 		 }
-			addition = `<button type="button" class="btn btn-primary btn-sm mt-3" onclick="add_radio(event,'${type}')">Add Radio</button><br/>
+		 var head2 = type.charAt(0).toUpperCase()+type.slice(1);
+			addition = `<button type="button" class="btn btn-primary btn-sm mt-3" onclick="add_radio(event,'${type}')">Add ${head2}</button><br/>
 						<div id="radio-gp-${i}" class="mt-3 ml-3" style="width:80%">
 							
 							<div id="elem-radio-1" class="relative">
 							<i class="fa fa-times closebtn" onclick = "close23(event)"></i>
-								<label for="field-text-1" class="font-weight-light">Radio Name: 	</label><br/>
+								<label for="field-text-1" class="font-weight-light">${head2} Name: 	</label><br/>
 								${hidden}
 								<input id="input1" class="values2 values3" type="text" name="radio-gp-${i}-name[1]" required>
 							</div>
