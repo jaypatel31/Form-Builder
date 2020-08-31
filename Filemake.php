@@ -162,7 +162,12 @@ $txt = '
 						fwrite($myfile, $content[$i]);	
 					}
 					
-			$last = '<button class="btn btn-primary" type="submit">SUBMIT</button>
+			$last = '<div class="container-contact2-form-btn">
+						<div class="wrap-contact2-form-btn">
+							<div class="contact2-form-bgbtn"></div>
+							<button class="contact2-form-btn" type="submit">SUBMIT</button>
+						</div>
+							</div>
 					
 				</form>
 			</div>
@@ -215,9 +220,11 @@ $xls = $file.'.xlsx';
 		//print_r($group);
 		$spreadsheet = new Spreadsheet();
 		$sheet = $spreadsheet->getActiveSheet();
+		
 		$sheet->setCellValue('A1', 'Hello World !');
 		for($i=0;$i<count($_SESSION['total-ip']);$i++){
 			$char = chr(65+$i);
+			$spreadsheet->getActiveSheet()->getStyle($char.'1')->getFont()->getColor()->setARGB(\PhpOffice\PhpSpreadsheet\Style\Color::COLOR_RED);
 			$sheet->setCellValue($char.'1', $_SESSION['total-ip'][$i]);
 		}
 		$writer = new Xlsx($spreadsheet);

@@ -136,7 +136,7 @@
 		icon[1].classList.toggle('change2');
 		icon[2].classList.toggle('change3');
 	}
-	var i =4;
+	var i =3;
 	var j = 2; 
 	function add_radio(event,box){
 		var tags = document.getElementsByClassName('values3');
@@ -179,7 +179,8 @@
 		var head = type.charAt(0).toUpperCase()+type.slice(1);
 		var add = document.getElementById('form-structure');
 		//console.log(add.innerHTML);
-		var addition = `<input type="text" name="elem[${i}]" value="<input class='input2' type='${type}' name='${type}-${i}'" hidden >`;
+		var addition = `<input type="text" name="elem[${i}]" value="<input class='input2' type='${type}' name='${type}[${i}]'" hidden >`;
+		var addition = `<input type="text" name="elem[${i}]" value="<input class='input2' type='${type}' name='input[${i}]'" hidden >`;
 		var required = `<label class="mt-4 checkbox"><input type="checkbox" name="check-${i}" value="checked" checked><span class="ml-2 lead">Required</span></label>`;
 		if(type=="radio" || type=="checkbox" ){
 			var hidden = `<input type="text" name="radio-gp[${i}][1]" value="<input class='mr-2' type='radio' name='radio-gp-${i}'" hidden >`;
