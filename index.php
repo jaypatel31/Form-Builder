@@ -50,10 +50,13 @@
 			<div class="font-weight-bold lead text-white "><h4>Form-Information</h4></div>
 		</div>
 			<div class="card-body" >
+			<input type="text" id="rgbv" value="" hidden name="rgbavalue" ></input>
 			<label for="field-text-1" class="font-weight-bold">Form Name: </label><br/>
 			<input id="input1" class="values2" type="text" name="heading" required>
 			<label for="field-text-1" class="font-weight-bold">Form Description: </label><br/>
-			<input id="input1" class="values2" type="text" name="description" required><br/>
+			<input id="input1" class="values2"   type="text" name="description" required><br/>
+			<label for="field-text-1" class="font-weight-bold">Form Color: </label><br/>
+			<input id="" class="w-100" onchange="rgba(event)" type="color" name="color" required><br/>
 			<div class="mt-3">
 			<label for="field-text-1" class="font-weight-bold adjust">Start-Date: </label>
 			<input id="input12" class="values2" type="date" name="st-date" required>
@@ -136,7 +139,7 @@
 		icon[1].classList.toggle('change2');
 		icon[2].classList.toggle('change3');
 	}
-	var i =3;
+	var i =4;
 	var j = 2; 
 	function add_radio(event,box){
 		var tags = document.getElementsByClassName('values3');
@@ -227,5 +230,27 @@
 		//console.log(drop);
 		drop.remove();
 	}
+	function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+function rgba(event){
+	var hex = event.target.value;
+	hex = hex.replace('#','');
+    r = parseInt(hex.substring(0,2), 16);
+    g = parseInt(hex.substring(2,4), 16);
+    b = parseInt(hex.substring(4,6), 16);
+	
+    result = 'rgba('+r+','+g+','+b+','+0.8+')';
+
+  //event.target.value = result;
+    console.log(event.target.value);
+	rgbv.value=result;
+}
+//var a = (hexToRgb("#0033ff").g);
 </script>
 </html>

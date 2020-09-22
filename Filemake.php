@@ -85,7 +85,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 						$end2 = ")";
 						$cc2="//";
 					}
-					//echo $sup;
+					//echo $_POST['rgbavalue'];
 					//echo $sup2;
 					//exit;
 					
@@ -141,7 +141,7 @@ $txt = '
 	
 	<form action="../answer.php" method="post" enctype="multipart/form-data">
 	<div class="bg-contact2" style="background-image: url(\'../images/bg-01.jpg\');">
-		<div class="container-contact2">
+		<div class="container-contact2" style="background-color:'.$_POST['rgbavalue'].'">
 			<div class="wrap-contact2">
 			<?php 
 				if($msg!==false){
