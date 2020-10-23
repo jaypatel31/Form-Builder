@@ -2,7 +2,7 @@
 	session_start();
 	echo "<pre>";
 	print_r($_POST);
-	print_r($_FILES);
+	//print_r($_FILES);
 	print_r($_SESSION);
 	$group = array();	
 	$user_ip = array();
@@ -31,13 +31,22 @@
 			foreach($_FILES as $key =>$values){
 				foreach($values as $id=>$faname){
 					if($id=='name'){
-						
-						$tp = $faname;
+						if(is_array($faname)){
+							$ket = array_keys($faname);
+							$tp = $faname[$ket[0]];
+						}
+						else{
+							$tp = $faname;
+						}
+						//$ket = array_keys($faname);
+						//print_r($tp = $faname[$ket[0]]);
 					}
 					if($id=='tmp_name'){
+						$ket = array_keys($faname);
+						$faname = $faname[$ket[0]];
 						move_uploaded_file($faname, $target.$tp);
 						$dest = $target.$tp;
-						echo $dest;
+						//echo $dest;
 					}
 				}
 			}
@@ -50,21 +59,21 @@
 							
 							if($key == $_SESSION['extra'][$j]){
 								if(is_array($value)){
-									echo $group[$j]." = ";
+									//echo $group[$j]." = ";
 									$empty = "";
 									foreach($value as $check){	
-										echo $check." ,";
+										//echo $check." ,";
 										$empty .= $check.",";
 										
 									}
 									array_push($user_ip,$empty);
 								}
 								else{
-									echo $group[$j]." = ";
+									//echo $group[$j]." = ";
 									array_push($user_ip,$value);
-									echo $value;
+									//echo $value;
 								}
-								echo "<br/>";
+								//echo "<br/>";
 								break;
 								
 							}
@@ -79,8 +88,8 @@
 				echo "<pre>";
 				
 				$fname = "Forms/".$fname.".xlsx";
-				echo $fname;
-				print_r($_SERVER);
+				//echo $fname;
+				//($_SERVER);
 				//exit;
 				
 require 'vendor/autoload.php';

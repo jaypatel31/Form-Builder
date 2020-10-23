@@ -1,10 +1,35 @@
 <?php 
 	session_start();
+	include('pdo.php');
+	if(isset($_SESSION['id'])){
+		if(!empty($_SESSION['id'])){
+				$sql3 = "SELECT * FROM user_from WHERE user_id = :u_id";
+				$stmt3 = $pdo->prepare($sql3);
+				$id = $_SESSION['id'];
+				$stmt3->execute(array(
+					":u_id" => $id
+				));
+				$rows = $stmt3->fetch(PDO::FETCH_ASSOC);
+				if($rows){
+					
+				}
+				else{
+					header('Location: login.php?error=ACCESS INAVLID');
+				}
+		}
+		else{
+			header('Location: login.php?error=ACCESS INAVLID');
+		}
+	}
+	else{
+		header('Location: login.php?error=ACCESS INAVLID');
+	}
 	require 'vendor/autoload.php';
 	use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 	$file = "Forms/".time().htmlentities($_POST['heading']);
 	$php = $file.".php";
+	$sqlip = time().htmlentities($_POST['heading']);
 	
 ?>
 <?php 
@@ -231,6 +256,29 @@ $xls = $file.'.xlsx';
 		$writer->save($xls);
 		$_SESSION['filename'] = $file.".xlsx";
 		$_SESSION['formname'] = $file.".php";
-		header('Location: index.php?success=File Creeated Suucesfully');
+		foreach($rows as $x => $val){
+			if(strpos($x, "form_key")>(-1)){
+				if($val==NULL){
+					$sql = "UPDATE user_from SET ".$x." = :key WHERE user_id = :id";
+					echo $sql;
+					$stmt = $pdo->prepare($sql);
+					$stmt->execute(array(
+						":key" => $sqlip,
+						":id" => $id
+					));
+					
+					$sql2 = "UPDATE user_master SET user_forms = user_forms + :add WHERE user_id = :u_id";
+					$stmt2 = $pdo->prepare($sql2);
+					$add = 1;
+					$stmt2->execute(array(
+						":add" => $add,
+						":u_id" => $id
+					));
+					break;
+				}
+			}
+		}
+		
+		header('Location: admin.php?success=File Creeated Suucesfully');
 	}
 ?>

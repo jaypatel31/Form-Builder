@@ -1,8 +1,49 @@
 <?php
-	session_start();
 	//echo "<pre>";
 	//print_r($_SERVER);
 	//echo "</pre>";
+	session_start();
+	include('pdo.php');
+	if(isset($_SESSION['id'])){
+		if(!empty($_SESSION['id'])){
+				$sql3 = "SELECT * FROM user_from WHERE user_id = :u_id";
+				$stmt3 = $pdo->prepare($sql3);
+				$id = $_SESSION['id'];
+				$stmt3->execute(array(
+					":u_id" => $id
+				));
+				$rows = $stmt3->fetch(PDO::FETCH_ASSOC);
+				if($rows){
+					$found=0;
+					$notfound=0;
+					$i=0;
+					foreach($rows as $x => $val){
+						//print_r($x."=>".$val);
+						if(strpos($x, "form_key")>(-1)){
+							if($val==NULL){
+								$notfound = $notfound+1;
+							}
+							else{
+								$found = $found+1;
+							}
+						} 
+					}
+					//echo $found;
+					if($found==5){
+						header('Location: admin.php?error=Form Limitation Reached');
+					}
+				}
+				else{
+					header('Location: login.php?error=ACCESS INAVLID');
+				}
+		}
+		else{
+			header('Location: login.php?error=ACCESS INAVLID');
+		}
+	}
+	else{
+		header('Location: login.php?error=ACCESS INAVLID');
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,7 +124,7 @@
 				<div class="card bg-light shadow mt-2 mb-3 bg-white rounded"  id="elem-1">
 				<div class="card-header">
 					<div class="font-weight-bold lead"><h4>Text-Field</h4></div>
-					<i class="fa fa-times closebtn" onclick = "close2(1)"></i>
+					<i class="fa fa-times closebtn" onclick = "close2(event)"></i>
 				</div>	
 					<div class="card-body" >
 						<input type="text" name="elem[1]" value="<input class='input2' type='text' name='input[1]'" hidden >
@@ -95,7 +136,7 @@
 				<div class="card bg-light shadow mt-2 mb-3 bg-white rounded"  id="elem-2">
 				<div class="card-header">
 					<div class="font-weight-bold lead"><h4>Email-Field</h4></div>
-					<i class="fa fa-times closebtn" onclick = "close2(2)"></i>
+					<i class="fa fa-times closebtn" onclick = "close2(event)"></i>
 				</div>	
 					<div class="card-body" >
 						<input type="text" name="elem[2]" value="<input class='input2' type='email' name='input[2]'" hidden >
@@ -107,7 +148,7 @@
 				<div class="card bg-light shadow mt-2 mb-3 bg-white rounded"  id="elem-3">
 				<div class="card-header">
 					<div class="font-weight-bold lead"><h4>Radio-Field</h4></div>
-					<i class="fa fa-times closebtn" onclick = "close2(3)"></i>
+					<i class="fa fa-times closebtn" onclick = "close2(event)"></i>
 				</div>	
 					<div class="card-body" >
 						
@@ -206,7 +247,7 @@
 		add.innerHTML += `<div class="card bg-light shadow mt-2 mb-3 bg-white rounded"  id="elem-${i}">
 				<div class="card-header">
 					<div class="font-weight-bold lead"><h4>${head}-Field</h4></div>
-					<i class="fa fa-times closebtn" onclick = "close2(${i})"></i>
+					<i class="fa fa-times closebtn" onclick = "close2(event)"></i>
 				</div>	
 					<div class="card-body" >
 						<label for="field-text-${i}" class="font-weight-bold">Field Name: </label><br/>
@@ -221,9 +262,24 @@
 				}
 				//document.getElementById('input1').value = value1;
 	}
-	function close2(id){
-		var drop = document.getElementById('elem-'+id);
+	function close2(event){
+		var drop = event.target.parentElement.parentElement;
+		console.log(drop)
+		let dropid = drop.id;
+		let currentstate = dropid.match(/\d/ig);
+		currentstate = currentstate[0];
+		let all = $("#"+dropid).nextUntil("#"+dropid,0);
+		console.log(all.length)
 		drop.remove();
+			for(var o = 0;o<all.length;o++){
+				$("#"+all[o].id).prop('id', `elem-${currentstate++}`);
+				console.log(all[o])
+				//prop('id', 'newId');
+			}
+		
+		//console.log(all);
+		i--;
+		
 	}
 	function close23(event){
 		var drop = event.target.parentElement;
